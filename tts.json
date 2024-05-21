@@ -1,0 +1,13 @@
+[{
+  "concurrentRate": "5000",
+  "contentType": "audio/mpeg",
+  "enabledCookieJar": false,
+  "header": "{\"Content-Type\":\"text/plain\",\"Format\":\"audio-24khz-48kbitrate-mono-mp3\", \"Token\":\"lx900426\"}",
+  "id": 1716285353343,
+  "lastUpdateTime": 1716285502237,
+  "loginCheckJs": "",
+  "loginUi": "",
+  "loginUrl": "",
+  "name": "zh-CN-YunxiNeural",
+  "url": "https://tts.dabadibadu.xyz/api/ra ,{\"method\":\"POST\",\"body\":\"<speak xmlns=\\\"http://www.w3.org/2001/10/synthesis\\\" xmlns:mstts=\\\"http://www.w3.org/2001/mstts\\\" xmlns:emo=\\\"http://www.w3.org/2009/10/emotionml\\\" version=\\\"1.0\\\" xml:lang=\\\"en-US\\\"><voice name=\\\"zh-CN-YunxiNeural\\\"><prosody rate=\\\"{{(speakSpeed -10) * 2}}%\\\" pitch=\\\"+0Hz\\\">{{String(speakText).replace(/&/g, '&amp;').replace(/\\\"/g, '&quot;').replace(/'/g, '&apos;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\\\\/g, '')}}</prosody></voice></speak>\"}"
+}]
