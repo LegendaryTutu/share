@@ -1,13 +1,81 @@
-[{
-  "concurrentRate": "5000",
-  "contentType": "audio/mpeg",
-  "enabledCookieJar": false,
-  "header": "{\"Content-Type\":\"text/plain\",\"Format\":\"audio-24khz-48kbitrate-mono-mp3\", \"Token\":\"lx900426\"}",
-  "id": 1716285353343,
-  "lastUpdateTime": 1716285502237,
-  "loginCheckJs": "",
-  "loginUi": "",
-  "loginUrl": "",
-  "name": "zh-CN-YunxiNeural",
-  "url": "https://tts.dabadibadu.xyz/api/ra ,{\"method\":\"POST\",\"body\":\"<speak xmlns=\\\"http://www.w3.org/2001/10/synthesis\\\" xmlns:mstts=\\\"http://www.w3.org/2001/mstts\\\" xmlns:emo=\\\"http://www.w3.org/2009/10/emotionml\\\" version=\\\"1.0\\\" xml:lang=\\\"en-US\\\"><voice name=\\\"zh-CN-YunxiNeural\\\"><prosody rate=\\\"{{(speakSpeed -10) * 2}}%\\\" pitch=\\\"+0Hz\\\">{{String(speakText).replace(/&/g, '&amp;').replace(/\\\"/g, '&quot;').replace(/'/g, '&apos;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\\\\/g, '')}}</prosody></voice></speak>\"}"
-}]
+[
+  {
+    "contentType": "audio/wav",
+    "enabledCookieJar": false,
+    "id": -100,
+    "lastUpdateTime": 1716357783474,
+    "name": "1.百度",
+    "url": "http://tts.baidu.com/text2audio,{\n    \"method\": \"POST\",\n    \"body\": \"tex={{java.encodeURI(java.encodeURI(speakText))}}&spd={{(speakSpeed + 5) / 10 + 4}}&per=3&cuid=baidu_speech_demo&idx=1&cod=2&lan=zh&ctp=1&pdt=160&vol=5&aue=6&pit=5&_res_tag_=audio\"\n}"
+  },
+  {
+    "contentType": "audio/mpeg",
+    "enabledCookieJar": false,
+    "id": -29,
+    "lastUpdateTime": 1716357783475,
+    "loginCheckJs": "var response = result;\nif (response.headers().get(\"Content-Type\") != \"audio/mpeg\") {\n    var body = JSON.parse(response.body().string())\n    if (body.status == 40000001) {\n        source.login()\n        java.getHeaderMap().putAll(source.getHeaderMap(true))\n        response = java.getResponse()\n    } else {\n        throw body.message\n    }\n}\nresponse",
+    "loginUi": "[\n  {\n    \"name\": \"AppKey\",\n    \"type\": \"text\"\n  },\n  {\n    \"name\": \"AccessKeyId\",\n    \"type\": \"text\"\n  },\n  {\n    \"name\": \"AccessKeySecret\",\n    \"type\": \"text\"\n  }\n]",
+    "loginUrl": "function login(){var loginInfo = source.getLoginInfoMap();\nvar accessKeyId = loginInfo.get('AccessKeyId');\nvar accessKeySecret = loginInfo.get('AccessKeySecret');\nvar timestamp = java.timeFormatUTC(new Date().getTime(), \"yyyy-MM-dd'T'HH:mm:ss'Z'\", 0);\nvar aly = new JavaImporter(Packages.javax.crypto.Mac, Packages.javax.crypto.spec.SecretKeySpec, Packages.javax.xml.bind.DatatypeConverter, Packages.java.net.URLEncoder, Packages.java.lang.String, Packages.android.util.Base64);\nwith (aly) {\n    function percentEncode(value) {\n        return URLEncoder.encode(value, \"UTF-8\").replace(\"+\", \"%20\")\n            .replace(\"*\", \"%2A\").replace(\"%7E\", \"~\")\n    }\n\n    function sign(stringToSign, accessKeySecret) {\n        var mac = Mac.getInstance('HmacSHA1');\n        mac.init(new SecretKeySpec(String(accessKeySecret + '&').getBytes(\"UTF-8\"), \"HmacSHA1\"));\n        var signData = mac.doFinal(String(stringToSign).getBytes(\"UTF-8\"));\n        var signBase64 = Base64.encodeToString(signData, Base64.NO_WRAP);\n        var signUrlEncode = percentEncode(signBase64);\n        return signUrlEncode;\n    }\n}\nvar query = 'AccessKeyId=' + accessKeyId + '&Action=CreateToken&Format=JSON&RegionId=cn-shanghai&SignatureMethod=HMAC-SHA1&SignatureNonce=' + java.randomUUID() + '&SignatureVersion=1.0&Timestamp=' + percentEncode(timestamp) + '&Version=2019-02-28';\nvar signStr = sign('GET&' + percentEncode('/') + '&' + percentEncode(query), accessKeySecret);\nvar queryStringWithSign = \"Signature=\" + signStr + \"&\" + query;\nvar body = java.ajax('http://nls-meta.cn-shanghai.aliyuncs.com/?' + queryStringWithSign)\nvar res = JSON.parse(body)\nif (res.Message) {\n    throw new Error(res.Message)\n}\nvar header = { \"X-NLS-Token\": res.Token.Id };\nsource.putLoginHeader(JSON.stringify(header))}",
+    "name": "2.阿里云语音",
+    "url": "https://nls-gateway.cn-shanghai.aliyuncs.com/stream/v1/tts,{\"method\": \"POST\",\"body\": {\"appkey\":\"{{source.getLoginInfoMap().get('AppKey')}}\",\"text\":\"{{speakText}}\",\"format\":\"mp3\",\"volume\":100,\"speech_rate\":{{String((speakSpeed) * 20 - 400)}} }}"
+  },
+  {
+    "concurrentRate": "5000",
+    "contentType": "audio/mpeg",
+    "enabledCookieJar": false,
+    "header": "{\"Content-Type\":\"text/plain\",\"Format\":\"audio-24khz-48kbitrate-mono-mp3\", \"Token\":\"lx900426\"}",
+    "id": 1716357627095,
+    "lastUpdateTime": 1716357616493,
+    "name": "大声朗读1233（zh-CN-XiaoxiaoNeural）",
+    "url": "https://tts.dabadibadu.xyz/api/ra ,{\"method\":\"POST\",\"body\":\"<speak xmlns=\\\"http://www.w3.org/2001/10/synthesis\\\" xmlns:mstts=\\\"http://www.w3.org/2001/mstts\\\" xmlns:emo=\\\"http://www.w3.org/2009/10/emotionml\\\" version=\\\"1.0\\\" xml:lang=\\\"en-US\\\"><voice name=\\\"zh-CN-XiaoxiaoNeural\\\"><prosody rate=\\\"{{(speakSpeed -10) * 2}}%\\\" pitch=\\\"+0Hz\\\">{{String(speakText).replace(/&/g, '&amp;').replace(/\\\"/g, '&quot;').replace(/'/g, '&apos;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\\\\/g, '')}}</prosody></voice></speak>\"}"
+  },
+  {
+    "concurrentRate": "5000",
+    "contentType": "audio/mpeg",
+    "enabledCookieJar": false,
+    "header": "{\"Content-Type\":\"text/plain\",\"Format\":\"audio-24khz-48kbitrate-mono-mp3\", \"Token\":\"lx900426\"}",
+    "id": 1716357857916,
+    "lastUpdateTime": 1716357846733,
+    "name": "大声朗读1233（zh-CN-XiaoyiNeural）",
+    "url": "https://tts.dabadibadu.xyz/api/ra ,{\"method\":\"POST\",\"body\":\"<speak xmlns=\\\"http://www.w3.org/2001/10/synthesis\\\" xmlns:mstts=\\\"http://www.w3.org/2001/mstts\\\" xmlns:emo=\\\"http://www.w3.org/2009/10/emotionml\\\" version=\\\"1.0\\\" xml:lang=\\\"en-US\\\"><voice name=\\\"zh-CN-XiaoyiNeural\\\"><prosody rate=\\\"{{(speakSpeed -10) * 2}}%\\\" pitch=\\\"+0Hz\\\">{{String(speakText).replace(/&/g, '&amp;').replace(/\\\"/g, '&quot;').replace(/'/g, '&apos;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\\\\/g, '')}}</prosody></voice></speak>\"}"
+  },
+  {
+    "concurrentRate": "5000",
+    "contentType": "audio/mpeg",
+    "enabledCookieJar": false,
+    "header": "{\"Content-Type\":\"text/plain\",\"Format\":\"audio-24khz-48kbitrate-mono-mp3\", \"Token\":\"lx900426\"}",
+    "id": 1716357835247,
+    "lastUpdateTime": 1716357824060,
+    "name": "大声朗读1233（zh-CN-YunjianNeural）",
+    "url": "https://tts.dabadibadu.xyz/api/ra ,{\"method\":\"POST\",\"body\":\"<speak xmlns=\\\"http://www.w3.org/2001/10/synthesis\\\" xmlns:mstts=\\\"http://www.w3.org/2001/mstts\\\" xmlns:emo=\\\"http://www.w3.org/2009/10/emotionml\\\" version=\\\"1.0\\\" xml:lang=\\\"en-US\\\"><voice name=\\\"zh-CN-YunjianNeural\\\"><prosody rate=\\\"{{(speakSpeed -10) * 2}}%\\\" pitch=\\\"+0Hz\\\">{{String(speakText).replace(/&/g, '&amp;').replace(/\\\"/g, '&quot;').replace(/'/g, '&apos;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\\\\/g, '')}}</prosody></voice></speak>\"}"
+  },
+  {
+    "concurrentRate": "5000",
+    "contentType": "audio/mpeg",
+    "enabledCookieJar": false,
+    "header": "{\"Content-Type\":\"text/plain\",\"Format\":\"audio-24khz-48kbitrate-mono-mp3\", \"Token\":\"lx900426\"}",
+    "id": 1716357879789,
+    "lastUpdateTime": 1716357868613,
+    "name": "大声朗读1233（zh-CN-YunxiNeural）",
+    "url": "https://tts.dabadibadu.xyz/api/ra ,{\"method\":\"POST\",\"body\":\"<speak xmlns=\\\"http://www.w3.org/2001/10/synthesis\\\" xmlns:mstts=\\\"http://www.w3.org/2001/mstts\\\" xmlns:emo=\\\"http://www.w3.org/2009/10/emotionml\\\" version=\\\"1.0\\\" xml:lang=\\\"en-US\\\"><voice name=\\\"zh-CN-YunxiNeural\\\"><prosody rate=\\\"{{(speakSpeed -10) * 2}}%\\\" pitch=\\\"+0Hz\\\">{{String(speakText).replace(/&/g, '&amp;').replace(/\\\"/g, '&quot;').replace(/'/g, '&apos;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\\\\/g, '')}}</prosody></voice></speak>\"}"
+  },
+  {
+    "concurrentRate": "5000",
+    "contentType": "audio/mpeg",
+    "enabledCookieJar": false,
+    "header": "{\"Content-Type\":\"text/plain\",\"Format\":\"audio-24khz-48kbitrate-mono-mp3\", \"Token\":\"lx900426\"}",
+    "id": 1716357898335,
+    "lastUpdateTime": 1716357887158,
+    "name": "大声朗读1233（zh-CN-YunxiaNeural）",
+    "url": "https://tts.dabadibadu.xyz/api/ra ,{\"method\":\"POST\",\"body\":\"<speak xmlns=\\\"http://www.w3.org/2001/10/synthesis\\\" xmlns:mstts=\\\"http://www.w3.org/2001/mstts\\\" xmlns:emo=\\\"http://www.w3.org/2009/10/emotionml\\\" version=\\\"1.0\\\" xml:lang=\\\"en-US\\\"><voice name=\\\"zh-CN-YunxiaNeural\\\"><prosody rate=\\\"{{(speakSpeed -10) * 2}}%\\\" pitch=\\\"+0Hz\\\">{{String(speakText).replace(/&/g, '&amp;').replace(/\\\"/g, '&quot;').replace(/'/g, '&apos;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\\\\/g, '')}}</prosody></voice></speak>\"}"
+  },
+  {
+    "concurrentRate": "5000",
+    "contentType": "audio/mpeg",
+    "enabledCookieJar": false,
+    "header": "{\"Content-Type\":\"text/plain\",\"Format\":\"audio-24khz-48kbitrate-mono-mp3\", \"Token\":\"lx900426\"}",
+    "id": 1716357917587,
+    "lastUpdateTime": 1716357906399,
+    "name": "大声朗读1233（zh-CN-YunyangNeural）",
+    "url": "https://tts.dabadibadu.xyz/api/ra ,{\"method\":\"POST\",\"body\":\"<speak xmlns=\\\"http://www.w3.org/2001/10/synthesis\\\" xmlns:mstts=\\\"http://www.w3.org/2001/mstts\\\" xmlns:emo=\\\"http://www.w3.org/2009/10/emotionml\\\" version=\\\"1.0\\\" xml:lang=\\\"en-US\\\"><voice name=\\\"zh-CN-YunyangNeural\\\"><prosody rate=\\\"{{(speakSpeed -10) * 2}}%\\\" pitch=\\\"+0Hz\\\">{{String(speakText).replace(/&/g, '&amp;').replace(/\\\"/g, '&quot;').replace(/'/g, '&apos;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\\\\/g, '')}}</prosody></voice></speak>\"}"
+  }
+]
